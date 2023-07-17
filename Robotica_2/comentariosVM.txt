@@ -1,0 +1,10 @@
+Instalar Ubuntu 22.04 en VirtualBox 7 en modo unattended, cambiando los credenciales que coloca por defecto.
+Ya dentro de Ubuntu, ir a Settings>Region&Language y cambiar TODAS las opciones a English (United States) o United States. Esto se hizo para que funcionara la terminal.
+Finalmente para habilitar permisos de sudo al usuario. Entrar a la terminal y escribir:
+
+su -
+(pedirá Password, este es el que se colocó para el usuario para la instalación)
+sudo usermod -aG sudo USER
+(USER es el nombre de usuario que se colocó para la instalación)
+
+Con esto ya debería funcionar todo normal. Correr primero sudo apt-get update y sudo apt-get upgrade antes de instalar ROS2 Humble siguiendo las instrucciones del sitio.
