@@ -128,6 +128,7 @@ try
     else
         disp('No es una resistencia de 4.7 kΩ')
     end
+    
 catch   
     disp('No es una resistencia de 4.7 kΩ')
 end
