@@ -12,7 +12,7 @@ clear;clc;
 %                            Cargar imagen
 % =========================================================================
 
-A = imread('res4.jpeg');
+A = imread('res3.jpg');
 %figure;
 %imshow(A);
 

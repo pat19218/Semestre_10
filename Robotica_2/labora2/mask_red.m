@@ -11,7 +11,7 @@ function [BW,maskedRGBImage] = mask_red(RGB)
 
 % Convert RGB image to chosen color space
 I = rgb2hsv(RGB);
-
+imshow(I);
 % Define thresholds for channel 1 based on histogram settings
 channel1Min = 0.960;
 channel1Max = 0.028;
