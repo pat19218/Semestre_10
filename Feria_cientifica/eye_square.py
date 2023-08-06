@@ -20,7 +20,7 @@ def detect_eyes_and_forehead(image):
             # Recortar y escalar las regiones de los ojos y la frente
             eye_forehead = cv2.resize(image[y_forehead:y_forehead + eye_forehead_height,
                                             x_eye - x_offset:x_eye - x_offset + eye_forehead_width],
-                                     (340, 340))
+                                     (380, 140))
 
             # Mostrar la imagen en una ventana aparte
             cv2.imshow('Eyes and Forehead', eye_forehead)

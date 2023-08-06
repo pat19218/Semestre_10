@@ -1,0 +1,41 @@
+Dlib en windows.
+###
+Entorno virtual si lo desea.
+
+py -m pip install --upgrade pip
+py -m pip --version
+
+pip 21.1.3 from c:\python39\lib\site-packages (Python 3.9.4)
+
+py -m pip install --user virtualenv
+
+py -m venv env
+
+#para activar
+.\env\Scripts\activate
+
+# para desactivar
+deactivate
+
+#generar requirements
+pip freeze > requirements.txt
+
+#instalar requirements
+
+###
+
+1) Descargar Visual Studio Community
+	a) Seleccionar "Desarrollo para el escritorio con C++"
+	b) Instalar (este proceso tarda varios minutos)
+
+2) Instalar CMAKE
+	a) Abrir terminal: pip install cmake
+	b) pip freeze, para verificar instalación
+3) Instalar dlib
+	a) pip install dlib (puede tardar varios minutos)
+	b) pip freeze, para verificar instalación
+4) dlib extras
+	a) Ve a la pagina http://dlib.net/files/
+	b) Descarga: shape_predictor_68_face_landmarks.dat
+	c) Descomprimir
+	
