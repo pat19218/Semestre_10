@@ -1,11 +1,14 @@
+%--------------------------------------------------------------------------
+%  Nombre:      Cristhofer Patzán
+%  Carné:       19219
+%  Descripcion: Dado que el BIOPAC MP41 puede presentar una perturbacion
+%               inusual en la señal, al momento de obtener los datos. Se
+%               aplica un filtro para recuperar la señal.
+%--------------------------------------------------------------------------
 function clean_little_biopac(filename)
     data_emg = readtable(filename,'Range','A:B'); %30286
     data_emg = table2array(data_emg);
     Fs_eeg = 1000;
-
-    % figure(1)
-    % plot(data_emg(:,1),data_emg(:,2));
-
 
     Wc_low = 45/Fs_eeg;             %FrecuenciaCorte / FrecuenciaMuestreo
     Wc_high = 10/Fs_eeg;
