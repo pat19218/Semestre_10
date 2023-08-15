@@ -68,13 +68,13 @@ else
 end
 
 %Subventanas para laz = zeros(length(eeg),canales);
-zc = zeros(size_cint,canales);
-mav = zeros(size_cint,canales);
+% zc = zeros(size_cint,canales);    %(CP)
+% mav = zeros(size_cint,canales);   %(CP)
 desviacion = zeros(size_cint,canales);
 Theta = zeros(size_cint,canales);
 Beta = zeros(size_cint,canales);
 Alpha = zeros(size_cint,canales);
-Gamma = zeros(size_cint,canales);
+% Gamma = zeros(size_cint,canales); %(CP)
 %Ratios - salida features
 ratio_1 = zeros(size_cint,canales);
 ratio_2 = zeros(size_cint,canales);
@@ -82,21 +82,25 @@ ratio_3 = zeros(size_cint,canales);
 ratio_4 = zeros(size_cint,canales);
 ratio_5 = zeros(size_cint,canales);
 
-curtosis = zeros(size_cint,canales);
-lzx = zeros(size_cint,canales);
-eac = zeros(size_cint,canales); %EAC
-ventana_EA = 10;
+% curtosis = zeros(size_cint,canales);  %(CP)
+% lzx = zeros(size_cint,canales);       %(CP)
+% eac = zeros(size_cint,canales); %EAC  %(CP)
+% --(CP)--
+%ventana_EA = 10;
 %Muestras de cada subventana EAC
-muestas_ventana_EA = round(muestras/ventana_EA);
-if ((muestras - muestas_ventana_EA*ventana_EA)<0)
-    muestas_ventana_EA = muestas_ventana_EA-1;
-end
+% muestas_ventana_EA = round(muestras/ventana_EA);
+% if ((muestras - muestas_ventana_EA*ventana_EA)<0)
+%     muestas_ventana_EA = muestas_ventana_EA-1;
+% end
+
+%--(CP)--
 %Zero Crossing index function
-max_amplitud = max(abs(channels))*0.02; % 2% de la amplitud de la señal
-umbral = max(max_amplitud);
-for i=1:canales
-    z(:,i) =  ZC(channels(:,i),umbral)'; %Calcular todos los ZC de la señal
-end
+% max_amplitud = max(abs(channels))*0.02; % 2% de la amplitud de la señal
+% umbral = max(max_amplitud);
+% for i=1:canales
+%     z(:,i) =  ZC(channels(:,i),umbral)'; %Calcular todos los ZC de la señal
+% end
+
 i=1;
 while(1)
     
@@ -104,7 +108,7 @@ while(1)
     i = i+1;
     if(mod(i,(muestras))==0)      %Calcular caracteristicas de cada ventana
         %WindowSignal es un canal de la señal; dimension n x 1
-        window_signal = channel_ventana((j*muestras)+1:i,k);
+        % window_signal = channel_ventana((j*muestras)+1:i,k);
         flag = flag+1;
         
         if op(1) == 1 % θ/β
@@ -164,8 +168,10 @@ for i=1:canales
     a=a+5;
 end
 resta=1;
-%Se establece vfeatures antes para mejorar rendimiento
-%vfeatures = zeros(1,4);
+
+% Prealocar vfeatures con un tamaño máximo posible. (CP)
+vfeatures = zeros(size(totfeatures, 1), sum(op));
+
 for j=1:canales
     for i=1:6
         if op(i)==1
@@ -175,5 +181,9 @@ for j=1:canales
     end
     
 end
+
+% Ajustar vfeatures al tamaño real necesario. (CP)
+vfeatures = vfeatures(:, 1:resta-1);
+
 Matriz_features = vfeatures;
 end

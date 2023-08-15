@@ -21,25 +21,28 @@ else
         eeg(:,i)= edf(c(i),:)';
     end
 end
+
 %Preprocesamiento: FILTROS
 Fs = fs;
-fred_electrica = designfilt('bandstopiir','FilterOrder',2, ...
-                'HalfPowerFrequency1',59,'HalfPowerFrequency2',61, ...
-                'DesignMethod','butter','SampleRate',Fs);
+% (CP)
+% fred_electrica = designfilt('bandstopiir','FilterOrder',2, ...
+%                 'HalfPowerFrequency1',59,'HalfPowerFrequency2',61, ...
+%                 'DesignMethod','butter','SampleRate',Fs);
 fruido = designfilt('bandstopiir','FilterOrder',4, ...
                 'HalfPowerFrequency1',0.5,'HalfPowerFrequency2',60, ...
                 'DesignMethod','butter','SampleRate',Fs);
 
-channels = filtfilt(fred_electrica,eeg);  
+%channels = filtfilt(fred_electrica,eeg);  %(CP)
 channels = filtfilt(fruido,eeg);  %contenido espectral EEG 0.5-60Hz
 
 %  for i=1:canales
 %      %Normalizar señales
 %      channels(:,i) = channels(:,i)/max(abs(channels(:,i)));
 %  end
+
 %Realizar ventana
 k=1;        %recorrer canales
-i=1;        %recorrer muestras
+%i=1;        %recorrer muestras
 j=0;
 flag=0;
 size_c = length(channels);
@@ -95,22 +98,29 @@ end
 %Concatenar vector de características
 %c = comb(x,i);
 a=0;
-b=0;
 
 for i=1:canales
   totfeatures(:,i+a:((i+a)+3)) = [desviacion(:,i),curtosis(:,i),zc(:,i),mav(:,i)];
   a=a+3;
 end
+
 resta=1;
+% Prealocar vfeatures con un tamaño máximo posible. (CP)
+vfeatures = zeros(size(totfeatures, 1), sum(op)); 
+
 for j=1:canales
-for i=1:4
-   if op(i)==1 
-       vfeatures(:,resta) = totfeatures(:,i); %eliminar columna no deseada
-       resta=resta+1;  
-   end
+    for i=1:4
+       if op(i)==1 
+           vfeatures(:,resta) = totfeatures(:,i); %eliminar columna no deseada
+           resta=resta+1;  
+       end
+    end
 end
 
-end
+% Ajustar vfeatures al tamaño real necesario. (CP)
+vfeatures = vfeatures(:, 1:resta-1);
+
+
 Matriz_features = vfeatures;
 end
 

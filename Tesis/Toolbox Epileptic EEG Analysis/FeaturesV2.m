@@ -149,17 +149,22 @@ for i=1:canales
   a=a+5;
 end
 resta=1;
-%Se establece vfeatures antes para mejorar rendimiento
-%vfeatures = zeros(1,4);
+
+% Prealocar vfeatures con un tamaño máximo posible. (CP)
+vfeatures = zeros(size(totfeatures, 1), sum(op));
+
 for j=1:canales
-for i=1:6
-   if op(i)==1 
-       vfeatures(:,resta) = totfeatures(:,i); %eliminar columna no deseada
-       resta=resta+1;  
-   end
+    for i=1:6
+       if op(i)==1 
+           vfeatures(:,resta) = totfeatures(:,i); %eliminar columna no deseada
+           resta=resta+1;  
+       end
+    end
 end
 
-end
+% Ajustar vfeatures al tamaño real necesario. (CP)
+vfeatures = vfeatures(:, 1:resta-1);
+
 Matriz_features = vfeatures;
 end
 

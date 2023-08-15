@@ -30,7 +30,7 @@ else
 end
 media = zeros(size_cint,1);
 power = zeros(size_cint,1);
-z = zeros(length(eeg),1);
+%(CP)-
 zc = zeros(size_cint,1);
 oblicuidad = zeros(size_cint,1);
 curtosis = zeros(size_cint,1);
@@ -97,8 +97,13 @@ end
 %concatenar features en una matriz
 features =  [power,media,desviacion,curtosis,oblicuidad,zc];
 a=1;
-b=0;
+%(CP)-
 index= zeros(1,6);
+
+%(CP)
+% Prealocar vftures para evitar el cambio de tamaño en cada iteración
+vftures = zeros(size(features, 1), sum(op));
+
 for i=1:6    
     if op(i)==1
        vftures(:,a) = features(:,i); 
@@ -107,9 +112,14 @@ for i=1:6
     end
     if op(i)==1
         index(i)= 1;
-        b=1;
+        %(CP)-
     end
 end
+
+%(CP)
+% Ajustar vftures al tamaño real necesario
+vftures = vftures(:, 1:a-1);
+
 tag1='';tag2='';tag3='';tag4='';tag5='';tag6='';
 for i=1:length(index)
    if index(1)

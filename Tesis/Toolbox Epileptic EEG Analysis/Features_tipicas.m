@@ -15,9 +15,10 @@ Fs = fs;
 fred_electrica = designfilt('bandstopiir','FilterOrder',2, ...
                 'HalfPowerFrequency1',59,'HalfPowerFrequency2',61, ...
                 'DesignMethod','butter','SampleRate',Fs);
-fruido = designfilt('bandstopiir','FilterOrder',4, ...
-                'HalfPowerFrequency1',0.5,'HalfPowerFrequency2',60, ...
-                'DesignMethod','butter','SampleRate',Fs);
+%(CP)
+% fruido = designfilt('bandstopiir','FilterOrder',4, ...
+%                 'HalfPowerFrequency1',0.5,'HalfPowerFrequency2',60, ...
+%                 'DesignMethod','butter','SampleRate',Fs);
 
 channels = filtfilt(fred_electrica,eeg);  
 %channels = filtfilt(fruido,eeg);  %contenido espectral EEG 0.5-60Hz
@@ -28,7 +29,7 @@ channels = filtfilt(fred_electrica,eeg);
 %  end
 %Realizar ventana
 k=1;        %recorrer canales
-i=1;        %recorrer muestras
+%i=1;        %recorrer muestras
 j=0;
 j1=0;
 flag=0;
@@ -99,12 +100,8 @@ while(1)
    
 end
 %Concatenar vector de características
-a=0;
-b=0;
 
 totfeatures(:,1:6) = [media(:,i),mav(:,i),zc(:,i),fmax(:,i), desviacion(:,i),curtosis(:,i)];
-
-
 
 for i=1:6
    if op(i)==1 
