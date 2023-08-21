@@ -5,6 +5,7 @@
 import cv2
 import mediapipe as mp
 import pyautogui
+import time
 # +-+-+-+-+-+-+-+-+-+-+-+- Funciones  +-+-+-+-+-+-+-+-+-+-+-+-
 def digital_zoom(frame, zoom_factor, zoom_center):
     h, w = frame.shape[:2]
@@ -40,6 +41,9 @@ def main():
     screen_x_last = 0
     screen_y_last = 0
     
+    x_mouse = int(200)
+    y_mouse = int(200)
+    
     
     # Zoom factor (increase this value to zoom in)
     zoom_factor = 5 
@@ -66,17 +70,37 @@ def main():
             for id, landmark in enumerate(landmarks[474:478]):
                 x = int(landmark.x * frame_w)
                 y = int(landmark.y * frame_h)
-                print("this is x: ",x)
-                print("this is y: ",y)
+                #print("this is x: ",x)
+                #print("this is y: ",y)
                 cv2.circle(frame, (x,y),int(3/zoom_factor),(0,255,0))
+                
                 if id == 1:
-                    #screen_x = screen_w / frame_w *x
-                    #screen_y = screen_h / frame_h *y
-                    
-                    
-                    pyautogui.moveTo(screen_x,screen_y)
-                    screen_x_last = screen_x
-                    screen_y_last = screen_y
+                    screen_x = screen_w / frame_w *x
+                    screen_y = screen_h / frame_h *y
+                    print("                             ", screen_w)
+                    #pyautogui.moveTo(screen_x,screen_y)
+                    diffx = abs(screen_x-screen_x_last) > 20
+                    diffy = abs(screen_y-screen_y_last) > 20
+                    print("en x: ", screen_x-screen_x_last)
+                    print("             en y: ", screen_y-screen_y_last)
+                    #time.sleep(0.5)
+                    if diffx:
+                        if ((screen_x - screen_x_last) < 0) and (x_mouse < (screen_w - 10)):
+                            x_mouse = int(x_mouse + 30)  #se movio derecha
+                        elif x_mouse > 10:
+                            x_mouse = int(x_mouse - 10)  #se movio izquierda
+                    """if diffy:
+                        if (screen_y - screen_y_last) < 0:
+                            y_mouse = y_mouse + 10
+                        else:
+                            y_mouse = y_mouse - 10
+                       """ 
+                    if  diffx or diffy:                            
+                        pyautogui.moveTo(x_mouse,y_mouse)
+                        
+                        screen_x_last = screen_x
+                        screen_y_last = screen_y
+                        
         
         # Ojo izquierdo        
         left = [landmarks[145], landmarks[159]]
@@ -93,6 +117,12 @@ def main():
             y_nose = int(landmark.y * frame_h)
             cv2.circle(frame, (x_nose,y_nose),int(3/zoom_factor),(0,255,255))
         
+        #union parpado
+        par = [landmarks[353]] 
+        for landmark in par:
+            x_par = int(landmark.x * frame_w)
+            y_par = int(landmark.y * frame_h)
+            cv2.circle(frame, (x_par,y_par),int(3/zoom_factor),(0,255,255))
         # ***********************
         # Get the center coordinates of the frame
         center_x, center_y = frame.shape[1] // 2, frame.shape[0] // 2

@@ -71,6 +71,7 @@ if op ~= 0
     hold on;
     scatter(centros(:,1), centros(:,2), 100, 'k', 'filled');
     title(['FINAL - Iteraciones: ', num2str(iter), ' Diferencia: ', num2str(diferencia)]);
+    grid on;
     pause(0.01);
 end
 
