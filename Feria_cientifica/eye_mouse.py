@@ -5,7 +5,7 @@
 import cv2
 import mediapipe as mp
 import pyautogui
-import time
+import numpy as np
 # +-+-+-+-+-+-+-+-+-+-+-+- Funciones  +-+-+-+-+-+-+-+-+-+-+-+-
 def digital_zoom(frame, zoom_factor, zoom_center):
     h, w = frame.shape[:2]
@@ -36,6 +36,8 @@ def main():
     x_nose = 0
     y_nose = 0
     
+    zoom_center = None
+    
     screen_x = 0
     screen_y = 0
     screen_x_last = 0
@@ -44,21 +46,45 @@ def main():
     x_mouse = int(200)
     y_mouse = int(200)
     
+    mp_face_detection = mp.solutions.face_detection
+    #mp_drawing = mp.solutions.drawing_utils
+    face_detection = mp_face_detection.FaceDetection(min_detection_confidence=0.5)
+
     
     # Zoom factor (increase this value to zoom in)
-    zoom_factor = 5 
+    zoom_factor = 5.0 
             
     cam = cv2.VideoCapture(0)
     if not cam.isOpened():
         raise IOError("Cannot open webcam")
 
+    
     face_mesh = mp.solutions.face_mesh.FaceMesh(refine_landmarks=True)
     screen_w, screen_h = pyautogui.size()   
 
     while True:
         _,frame = cam.read()
-        
         frame = cv2.flip(frame,1)
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = face_detection.process(rgb_frame)
+
+        if results.detections:
+            for detection in results.detections:
+                bboxC = detection.location_data.relative_bounding_box
+                ih, iw, _ = frame.shape
+                bbox = int(bboxC.xmin * iw), int(bboxC.ymin * ih), \
+                        int(bboxC.width * iw), int(bboxC.height * ih)
+                
+                new_zoom_center = (bbox[0] + bbox[2] // 2, bbox[1] + bbox[3] // 2)
+                
+                if zoom_center is None or np.linalg.norm(np.array(new_zoom_center) - np.array(zoom_center)) >= 20:
+                    zoom_center = new_zoom_center
+                
+                frame= digital_zoom(frame, zoom_factor, zoom_center)
+                
+                #cv2.rectangle(frame, bbox, (0, 255, 0), 2)
+
+        
         rgb_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         output = face_mesh.process(rgb_frame)
         landmark_points = output.multi_face_landmarks
@@ -85,10 +111,10 @@ def main():
                     print("             en y: ", screen_y-screen_y_last)
                     #time.sleep(0.5)
                     if diffx:
-                        if ((screen_x - screen_x_last) < 0) and (x_mouse < (screen_w - 10)):
+                        if ((screen_x - screen_x_last) < 0) and (x_mouse < (screen_w - 30)):
                             x_mouse = int(x_mouse + 30)  #se movio derecha
                         elif x_mouse > 10:
-                            x_mouse = int(x_mouse - 10)  #se movio izquierda
+                            x_mouse = int(x_mouse - 30)  #se movio izquierda
                     """if diffy:
                         if (screen_y - screen_y_last) < 0:
                             y_mouse = y_mouse + 10
@@ -128,10 +154,10 @@ def main():
         center_x, center_y = frame.shape[1] // 2, frame.shape[0] // 2
 
         # Apply digital zoom to the frame
-        try:
-            frame = digital_zoom(frame, zoom_factor, (x_nose, y_nose))
-        except:
-            frame = digital_zoom(frame, zoom_factor, (center_x, center_y))
+        #try:
+        #    frame = digital_zoom(frame, zoom_factor, (x_nose, y_nose))
+        #except:
+        #    frame = digital_zoom(frame, zoom_factor, (center_x, center_y))
         # ***********************
         
         if left[0].y - left[1].x < 0.035:
