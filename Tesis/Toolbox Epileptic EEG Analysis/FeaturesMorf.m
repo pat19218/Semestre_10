@@ -12,7 +12,7 @@ function [Matriz_FMorfologia] = FeaturesMorf(edf,fs,canales,muestras)
 %c: canales a encontrar las características
 %Se arreglan las dimensiones para que se tengan vectores fila en caso
 %la señal venga en vectores columna.
-
+disp(fs)
 %Arreglamos el vector para que sea vector columna
 if size(edf,1)>size(edf,2)
     edf = edf';
@@ -45,7 +45,7 @@ for i=1:MMC
         %Cálculo de las características de morfología
         WS = fft(ventana_interes);
         WSn = abs(WS/muestras);
-        WS1_1=WSn(1:muestras/2+1);
+        WS1_1=WSn(1:muestras/2+1); %corroborar 
         WS1_1(2:end-1) = 2*WS1_1(2:end-1);
         WS1_1 = (WS1_1).^2; %Espectro de potencia
         
