@@ -1,0 +1,58 @@
+%Graficamos cada ventana en los ejes (aprendizaje supervisado)
+            for i=1:length(app.no_ventana)
+                w = app.no_ventana(i);
+                plot_top = app.muestras_top(w);
+                plot_bot = app.muestras_bot(w);
+                %Si tiene etiqueta ictal
+                if app.CallingApp.Vector_Car_EEGVI(app.canal_EEGVI,w) == 1
+                    plot(app.EEGPlot1,... %Se indica a qué UIaxes graficar
+                        app.vector_tiempo_grafico(plot_bot:plot_top),... %Eje X
+                        app.CallingApp.EEG_VI(app.canal_a_desplegar,plot_bot:plot_top),... %Eje Y
+                        app.ColorIctal); %Color
+                %Si tiene etiqueta sano
+                elseif app.CallingApp.Vector_Car_EEGVI(app.canal_EEGVI,w) == 2
+                    plot(app.EEGPlot1,... %Se indica a qué UIaxes graficar
+                        app.vector_tiempo_grafico(plot_bot:plot_top),... %Eje X
+                        app.CallingApp.EEG_VI(app.canal_a_desplegar,plot_bot:plot_top),... %Eje Y
+                        app.ColorSano);
+                %Si tiene etiqueta preictal
+                elseif app.CallingApp.Vector_Car_EEGVI(app.canal_EEGVI,w) == 3
+                    plot(app.EEGPlot1,... %Se indica a qué UIaxes graficar
+                        app.vector_tiempo_grafico(plot_bot:plot_top),... %Eje X
+                        app.CallingApp.EEG_VI(app.canal_a_desplegar,plot_bot:plot_top),... %Eje Y
+                        app.ColorPreictal);
+                %Si tiene etiqueta interictal
+                else
+                    plot(app.EEGPlot1,... %Se indica a qué UIaxes graficar
+                        app.vector_tiempo_grafico(plot_bot:plot_top),... %Eje X
+                        app.CallingApp.EEG_VI(app.canal_a_desplegar,plot_bot:plot_top),... %Eje Y
+                        app.ColorInterictal);
+                end
+                hold(app.EEGPlot1,'on');
+            end
+	    hold(app.EEGPlot1,'off');
+            
+
+
+            %*******************************************************************************************%
+            %Graficamos cada ventana en los ejes (aprendizaje no supervisado)
+            for i=1:length(app.no_ventana)
+                w = app.no_ventana(i);
+                plot_top = app.muestras_top(w);
+                plot_bot = app.muestras_bot(w);
+                %Si tiene etiqueta 1
+                if app.CallingApp.Vector_Car_EEGMOR(app.canal_EEGVI,w) == 1
+                    plot(app.EEGPlot2,... %Se indica a qué UIaxes graficar
+                        app.vector_tiempo_grafico(plot_bot:plot_top),... %Eje X
+                        app.CallingApp.EEG_VI(app.canal_a_desplegar,plot_bot:plot_top),... %Eje Y
+                        app.ColorMono); %Color              
+                %Si tiene etiqueta 2
+                else
+                    plot(app.EEGPlot2,... %Se indica a qué UIaxes graficar
+                        app.vector_tiempo_grafico(plot_bot:plot_top),... %Eje X
+                        app.CallingApp.EEG_VI(app.canal_a_desplegar,plot_bot:plot_top),... %Eje Y
+                        app.ColorPoli);
+                end
+                hold(app.EEGPlot2,'on');
+            end
+            hold(app.EEGPlot2,'off');

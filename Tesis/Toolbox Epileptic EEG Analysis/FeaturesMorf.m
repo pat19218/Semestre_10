@@ -45,7 +45,7 @@ for i=1:MMC
         %Cálculo de las características de morfología
         WS = fft(ventana_interes);
         WSn = abs(WS/muestras);
-        WS1_1=WSn(1:muestras/2+1); %corroborar 
+        WS1_1=WSn(1:floor(muestras/2+1)); %corroborar 
         WS1_1(2:end-1) = 2*WS1_1(2:end-1);
         WS1_1 = (WS1_1).^2; %Espectro de potencia
         
