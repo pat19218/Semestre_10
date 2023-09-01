@@ -69,7 +69,7 @@ while(1)
             if(j>0) %contar ZC por cada ventana
                 zc(flag,1) = sum(z(j*muestras:i,1) == 1); 
             else
-                     zc(flag,1) = sum(z(1:(i-1),1) == 1);
+                zc(flag,1) = sum(z(1:(i-1),1) == 1);
             end
             j = j+1;
         end
