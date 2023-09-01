@@ -6,7 +6,10 @@
 % solicitan en la guía del laboratorio. Modifique sólo en los lugares del
 % código en donde se le indica.
 % =========================================================================
-
+caso = 3;       % 0 : Encarar a un objeto
+                % 1 : Mantener una distancia fija hacia un objeto
+                % 2 : Combinacion de los dos anteriores
+                % 3 : Colocar al objeto en una posicion deseada
 %% Parámetros del sistema
 % Pose de la cámara con respecto de la base del robot
 BR_C = [0,0,1; -1,0,0; 0,-1,0];
@@ -37,7 +40,18 @@ N = (tf-t0)/dt; % número de iteraciones
 
 %% Inicialización y condiciones iniciales
 % xi0 = [0; 0; pi/2+0.5]; % condición incial por defecto como backup
-xi0 = [0; 0; pi/2+0.5]; % ***** PUEDE MODIFICAR *****
+if caso == 0              % ***** PUEDE MODIFICAR *****
+    xi0 = [-1; -1; pi/2+0.5];
+elseif caso == 1
+    xi0 = [0; 0; 3*pi/2];
+elseif caso == 2
+    xi0 = [0; 0; pi/2+0.5];
+elseif caso == 3
+    xi0 = [-2; -1; 3*pi/2+0.5];
+else 
+    xi0 = [0; 0; pi/2+0.5];
+end
+
 mu0 = [0; 0];
 xi = xi0; % vector de estado 
 mu = mu0; % vector de entradas
@@ -45,8 +59,18 @@ mu = mu0; % vector de entradas
 %% Parámetros para el visual servoing
 % point0 = [0.5;2;0.2]; % punto por defecto como backup
 % ***** PUEDE MODIFICAR *****
-point = [0.5;2;0.2]; % centro del objeto de interés
-
+% centro del objeto de interés
+if caso == 0             
+    point = [0.5;2;0.2];
+elseif caso == 1
+    point = [0;-2;0.2];
+elseif caso == 2
+    point = [0;2;0.2];
+elseif caso == 3
+    point = [2;1;0.2];
+else 
+    point = [0.5;2;0.2];
+end
 % Inicialización de la visualización del plano de imagen
 IR_B = [cos(xi(3)), -sin(xi(3)), 0; sin(xi(3)), cos(xi(3)), 0; 0,0,1];
 Io_B = [xi(1:2); 0.05];
@@ -80,8 +104,27 @@ for n = 0:N
     % *********************************************************************
     % COLOCAR LOS COMPORTAMIENTOS AQUÍ
     % *********************************************************************
-    v = 0;
-    w = 0;
+    
+    if caso == 0
+        v = 0.0;
+        w = 0.001*(0-s(1));  
+
+    elseif caso == 1
+        v = 0.01*(100 + s(2));
+        w = 0.00*(0 - s(1));  
+
+    elseif caso == 2
+        v = 0.01*(100 + s(2));
+        w = 0.001*(0-s(1));  
+
+    elseif caso == 3
+        v =  0.01*(100 + s(2));
+        w = 0.001*(100-s(1)); 
+        
+    else 
+        v = 0.1;
+        w = -0.2;
+    end
     % *********************************************************************
     
     % Vector de entrada del sistema
