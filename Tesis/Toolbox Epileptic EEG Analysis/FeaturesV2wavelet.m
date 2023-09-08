@@ -66,16 +66,20 @@ while(1)
             desviacion(flag,1) = std(D);
             curtosis(flag,1) = var(D);
             oblicuidad(flag,1) = skewness(D);
-            if(j>0) %contar ZC por cada ventana
-                zc(flag,1) = sum(z(j*muestras:i,1) == 1); 
-            else
-                zc(flag,1) = sum(z(1:(i-1),1) == 1);
-            end
+            
+            % (CP) mala praxis del ZC
+            % if(j>0) %contar ZC por cada ventana
+            %     zc(flag,1) = z; %sum(z(j*muestras:i,1) == 1); 
+            % else
+            %     zc(flag,1) = z; %sum(z(1:(i-1),1) == 1);
+            % end
+            zc(flag,1) = z;
+            
             j = j+1;
         end
         if (i==size_c) 
-            flag=0;
-            i=1; 
+            %flag=0;
+            %i=1; 
             break;
         end  
 end
