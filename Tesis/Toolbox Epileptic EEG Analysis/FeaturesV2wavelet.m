@@ -112,12 +112,9 @@ for i=1:6
     if op(i)==1
        vftures(:,a) = features(:,i); 
        a=a+1;  
-       
+       index(i)= 1;       
     end
-    if op(i)==1
-        index(i)= 1;
-        %(CP)-
-    end
+    %(CP)- eliminacion de condicional if innecesaria    
 end
 
 %(CP)
