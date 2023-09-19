@@ -1,0 +1,10 @@
+eeg_sin plantilla 	12
+	binaural	7
+	general		5
+
+EMG plantilla		36
+EMG sin plantilla	12 docs (4 corridas al menos) 
+
+MAT
+features		10
+Struct			24
