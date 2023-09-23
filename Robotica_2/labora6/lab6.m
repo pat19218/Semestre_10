@@ -28,21 +28,34 @@ Fc = [ 0, 0;
 
 dt = 0.01;
 
+sys = ss(Ac, Bc+Fc, Cc, zeros(2,2));  
+sys1d = c2d(sys,dt,'zoh');
 
-
+A = sys1d.A;
+B = sys1d.B;
+F = sys1d.C;
+C = sys1d.D;
 
 %% Inciso 3. Estimación de matrices de covarianza
-Qw = [];
-Qv = [];
+[w, v] = sensor_test();
+
+var_w = var(w.');
+var_v = var(v.');
+
+Qw = [var_w(1), 0;
+      0, var_w(2)];
+
+Qv = [var_v(1), 0;
+      0, var_v(2)];
 
 
 
 %% Inciso 4. Inicialización de variables para el filtro
-xhat_prior = []; 
-xhat_post = [];
+xhat_prior = ones(length(A),1); 
+xhat_post = ones(length(A),1);
 
-P_prior = [];
-P_post = []; 
+P_prior = ones(5);
+P_post = ones(5); 
 
 % Array para almacenar el resultado del filtro de Kalman ***NO MODIFICAR***
 XHAT = zeros(numel(xhat_post), length(Y)); 
@@ -52,7 +65,17 @@ XHAT = zeros(numel(xhat_post), length(Y));
 %% Inciso 5. Implementación del filtro de Kalman
 for k = 1:length(Y)
     
+    y_k = Y(:,k);
 
+    %Predicción
+    xhat_prior = A*xhat_prior + B;
+    P_prior = A*P_prior*A.' + F*Qw*F.';
+
+    %Corrección
+    L_k = (Qv + C*P_prior*C.')/(P_prior*C.');
+    xhat_post = xhat_prior + L_k*(y_k - C*xhat_prior);
+    P_post = P_prior - (L_k*C*P_prior);
+    
     % Se guarda la salida del filtro de Kalman ***NO MODIFICAR***
     XHAT(:,k) = xhat_post;
 end
