@@ -28,13 +28,14 @@ Fc = [ 0, 0;
 
 dt = 0.01;
 
-sys = ss(Ac, Bc+Fc, Cc, zeros(2,2));  
+sys = ss(Ac, Fc, Cc, zeros(2,2));  
 sys1d = c2d(sys,dt,'zoh');
 
 A = sys1d.A;
-B = sys1d.B;
-F = sys1d.C;
-C = sys1d.D;
+B = Bc;
+F = sys1d.B;
+C = sys1d.C;
+D = sys1d.D;
 
 %% Inciso 3. Estimación de matrices de covarianza
 [w, v] = sensor_test();
@@ -68,11 +69,11 @@ for k = 1:length(Y)
     y_k = Y(:,k);
 
     %Predicción
-    xhat_prior = A*xhat_prior + B;
-    P_prior = A*P_prior*A.' + F*Qw*F.';
+    xhat_prior = A*xhat_post + B;
+    P_prior = A*P_post*A' + F*Qw*F';
 
     %Corrección
-    L_k = (Qv + C*P_prior*C.')/(P_prior*C.');
+    L_k = (P_prior*C')*(Qv + C*P_prior*C')^(-1);
     xhat_post = xhat_prior + L_k*(y_k - C*xhat_prior);
     P_post = P_prior - (L_k*C*P_prior);
     
