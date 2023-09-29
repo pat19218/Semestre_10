@@ -38,6 +38,14 @@ GPS = zeros(2, N+1);
 ENC_R = zeros(1,N+1); 
 ENC_L = zeros(1,N+1); 
 
+%% variables robot movil
+N_x = 256;    %flancos por revolucion (ticks)
+
+encoder_lticks_prev = 0;
+encoder_rticks_prev = 0;
+
+l = 4;
+
 %% Solución recursiva del sistema dinámico
 for n = 0:N
     % *********************************************************************
@@ -49,6 +57,7 @@ for n = 0:N
     
     % Vector de entrada del sistema
     mu = [phiR; phiL];
+
     % *********************************************************************
     
     % Se adelanta un paso en la simulación del robot diferencial y se
@@ -59,8 +68,17 @@ for n = 0:N
     % *********************************************************************
     % ESTIMAR EL ESTADO DEL ROBOT AQUÍ
     % *********************************************************************
+    delta_rticks = encoder_rticks - encoder_rticks_prev;
+    delta_lticks = encoder_lticks - encoder_lticks_prev;
+
+    Dl = 2*pi*(delta_lticks/N_x);
+    Dr = 2*pi*(delta_rticks/N_x);
+
+    Dc = (Dr + Dl) / 2; % cambio en desplazamiento lineal 
+    d_theta = (Dr - Dl) / l;
     
-    
+    encoder_lticks_prev = encoder_lticks;
+    encoder_rticks_prev = encoder_rticks;
     % *********************************************************************
     
     % Se guardan las trayectorias del estado y las entradas
