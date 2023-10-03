@@ -1,20 +1,20 @@
 % =========================================================================
 % MT3006 - LABORATORIO 7
 % -------------------------------------------------------------------------
-% Emplee el cÛdigo base que se presenta a continuaciÛn para desarrollar un
-% EKF que permita estimar el estado de un robot mÛvil diferencial equipado
-% con encoders incrementales en sus ruedas y un GPS, seg˙n lo indicado en
-% la guÌa del laboratorio. Modifique sÛlo en los lugares del
-% cÛdigo en donde se le indica.
+% Emplee el c√≥digo base que se presenta a continuaci√≥n para desarrollar un
+% EKF que permita estimar el estado de un robot m√≥vil diferencial equipado
+% con encoders incrementales en sus ruedas y un GPS, seg√∫n lo indicado en
+% la gu√≠a del laboratorio. Modifique s√≥lo en los lugares del
+% c√≥digo en donde se le indica.
 % =========================================================================
 
-%% Par·metros de la simulaciÛn
-dt = 0.01; % perÌodo de muestreo
+%% Par√°metros de la simulaci√≥n
+dt = 0.01; % per√≠odo de muestreo
 t0 = 0; % tiempo inicial
 tf = 10; % tiempo final
-N = (tf-t0)/dt; % n˙mero de iteraciones
+N = (tf-t0)/dt; % n√∫mero de iteraciones
 
-%% InicializaciÛn y condiciones iniciales
+%% Inicializaci√≥n y condiciones iniciales
 % Condiciones iniciales 
 x0 = 0; % ***** PUEDE MODIFICAR ***** init 0
 y0 = 0; % ***** PUEDE MODIFICAR ***** init 0
@@ -26,10 +26,10 @@ xi = xi0; % vector de estado
 mu = mu0; % vector de entradas
 
 % Arrays para almacenar las trayectorias de las variables de estado,
-% entradas y trayectoria del punto de interÈs en el plano de imagen
+% entradas y trayectoria del punto de inter√©s en el plano de imagen
 XI = zeros(numel(xi),N+1);
 MU = zeros(numel(mu),N+1);
-% InicializaciÛn de arrays
+% Inicializaci√≥n de arrays
 XI(:,1) = xi0;
 MU(:,1) = mu0;
 
@@ -44,13 +44,13 @@ N_x = 256;    %flancos por revolucion (ticks)
 encoder_lticks_prev = 0;
 encoder_rticks_prev = 0;
 
-distancia_l = 381;      %distancia entre ruedas
+gg = 4;      %
 r = 195;    %radio de la rueda
 
-%% SoluciÛn recursiva del sistema din·mico
+%% Soluci√≥n recursiva del sistema din√°mico
 for n = 0:N
     % *********************************************************************
-    % COLOCAR EL CONTROLADOR AQUÕ
+    % COLOCAR EL CONTROLADOR AQU√ç
     % *********************************************************************
     % Velocidades de las ruedas del robot
     phiR = 0;
@@ -61,13 +61,13 @@ for n = 0:N
 
     % *********************************************************************
     
-    % Se adelanta un paso en la simulaciÛn del robot diferencial y se
+    % Se adelanta un paso en la simulaci√≥n del robot diferencial y se
     % obtienen las mediciones otorgadas por los sensores a bordo
     [gps_position, encoder_rticks, encoder_lticks, xi] = ...
         differential_drive(xi, mu, dt);
     
     % *********************************************************************
-    % ESTIMAR EL ESTADO DEL ROBOT AQUÕ
+    % ESTIMAR EL ESTADO DEL ROBOT AQU√ç
     % *********************************************************************
     delta_rticks = encoder_rticks - encoder_rticks_prev;
     delta_lticks = encoder_lticks - encoder_lticks_prev;
@@ -75,8 +75,8 @@ for n = 0:N
     Dl = 2*pi*r*(delta_lticks/N_x);
     Dr = 2*pi*r*(delta_rticks/N_x);
 
-    Dc = (Dr + Dl) / 2;     % cambio en desplazamiento lineal 
-    d_theta = (Dr - Dl) / distancia_l;% cambio en desplazamiento angular
+    Dc = (Dr + Dl) / 2; % cambio en desplazamiento lineal 
+    d_theta = (Dr - Dl) / l;
     
     encoder_lticks_prev = encoder_lticks;
     encoder_rticks_prev = encoder_rticks;
@@ -109,7 +109,7 @@ grid minor;
 sf = 2; %***** PUEDE MODIFICAR *****
 
 
-%% AnimaciÛn y generaciÛn de figuras (NO modificar)
+%% Animaci√≥n y generaci√≥n de figuras (NO modificar)
 figure;
 subplot(2,2,1);
 plot(t, GPS', 'LineWidth', 1);
