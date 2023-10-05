@@ -38,7 +38,9 @@ GPS = zeros(2, N+1);
 ENC_R = zeros(1,N+1); 
 ENC_L = zeros(1,N+1); 
 
-%% variables robot movil    -(CP)-
+%% ************************************************************************ 
+% variables robot movil    -(CP)-
+%**************************************************************************
 N_x = 256;    %flancos por revolucion (ticks)
 
 encoder_lticks_prev = 0;
@@ -47,13 +49,16 @@ encoder_rticks_prev = 0;
 distancia_l = 381;      %distancia entre ruedas
 r = 195;    %radio de la rueda
 
+load("varianzas_gps_enc.mat")
+%**************************************************************************
+
 %% Solución recursiva del sistema dinámico
 for n = 0:N
     % *********************************************************************
     % COLOCAR EL CONTROLADOR AQUÍ
     % *********************************************************************
     % Velocidades de las ruedas del robot
-    phiR = 0;
+    phiR = 10;
     phiL = 0;
     
     % Vector de entrada del sistema
@@ -80,8 +85,15 @@ for n = 0:N
     
     encoder_lticks_prev = encoder_lticks;
     encoder_rticks_prev = encoder_rticks;
+
+    %Discretización de las matrices del proceso
+    A = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
+    B = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
+    F = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
+    C = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
+    D = zeros(2);
     % *********************************************************************
-    
+
     % Se guardan las trayectorias del estado y las entradas
     XI(:,n+1) = xi;
     MU(:,n+1) = mu;
@@ -92,6 +104,9 @@ for n = 0:N
     ENC_R(:,n+1) = encoder_rticks;
     ENC_L(:,n+1) = encoder_lticks;
 end
+
+%Descomentar la siguiente linea si es la primera corrida
+%save("data_para_var.mat", "ENC_L", "ENC_R", "GPS")
 
 % Trayectoria real del estado del robot
 % ***** MODIFICAR PARA GRAFICAR ENCIMA EL ESTADO ESTIMADO *****
