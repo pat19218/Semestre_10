@@ -50,6 +50,33 @@ distancia_l = 381;      %distancia entre ruedas
 r = 195;    %radio de la rueda
 
 load("varianzas_gps_enc.mat")
+%----------------------------------------------------------------------
+% Discretización de las matrices del proceso
+%----------------------------------------------------------------------
+A = @(x3,u1,w1) ([1, 0, -(u1+w1)*sin(x3);...
+                  0, 1, -(u1+w1)*cos(x3);...
+                  0, 0, 1]);
+
+B = @(x3) ([cos(x3), 0;...
+           sin(x3), 0;...
+           0, 1;]);
+
+F = @(x3) ([cos(x3), 0;...
+           sin(x3), 0;...
+           0, 1;]);
+
+C = [1, 0, 0;...
+     0, 1, 0;];
+
+D = zeros(2);
+%----------------------------------------------------------------------
+% Inicialización de variables para el filtro
+%----------------------------------------------------------------------
+xhat_prior = ones(length(A),1); 
+xhat_post = ones(length(A),1);
+
+P_prior = ones(length(A));
+P_post = ones(length(A));
 %**************************************************************************
 
 %% Solución recursiva del sistema dinámico
@@ -58,8 +85,13 @@ for n = 0:N
     % COLOCAR EL CONTROLADOR AQUÍ
     % *********************************************************************
     % Velocidades de las ruedas del robot
-    phiR = 10;
-    phiL = 0;
+    if n < (N/2)
+        phiR = 10;
+        phiL = 8;
+    else
+        phiR = 8;
+        phiL = 10;
+    end
     
     % Vector de entrada del sistema
     mu = [phiR; phiL];
@@ -76,22 +108,36 @@ for n = 0:N
     % *********************************************************************
     delta_rticks = encoder_rticks - encoder_rticks_prev;
     delta_lticks = encoder_lticks - encoder_lticks_prev;
-
+    %theta = 
     Dl = 2*pi*r*(delta_lticks/N_x);
     Dr = 2*pi*r*(delta_rticks/N_x);
 
-    Dc = (Dr + Dl) / 2;     % cambio en desplazamiento lineal 
+    Dp = (Dr + Dl) / 2;     % cambio en desplazamiento lineal 
     d_theta = (Dr - Dl) / distancia_l;% cambio en desplazamiento angular
     
     encoder_lticks_prev = encoder_lticks;
     encoder_rticks_prev = encoder_rticks;
 
-    %Discretización de las matrices del proceso
-    A = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
-    B = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
-    F = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
-    C = @(x1,x2,x3,u1,u2,u3,w1,w2) ([]);
-    D = zeros(2);
+    
+
+    %----------------------------------------------------------------------
+    % Implementación del filtro de Kalman
+    %----------------------------------------------------------------------
+    y_k = gps_position;
+
+    %Predicción
+    xhat_prior = A(theta,Dp,0)*xhat_post + B(theta);
+    P_prior = A(theta,Dp,0)*P_post*A(theta,Dp,0)' + F(theta)*Qw*F(theta)';
+
+    %Corrección
+    L_k = (P_prior*C')*(Qv + C*P_prior*C')^(-1);
+    xhat_post = xhat_prior + L_k*(y_k - C*xhat_prior);
+    P_post = P_prior - (L_k*C*P_prior);
+    
+    % Se guarda la salida del filtro de Kalman ***NO MODIFICAR***
+    %XHAT(:,k) = xhat_post;
+    
+
     % *********************************************************************
 
     % Se guardan las trayectorias del estado y las entradas
