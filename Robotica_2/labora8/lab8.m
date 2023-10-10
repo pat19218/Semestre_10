@@ -1,24 +1,27 @@
 % =========================================================================
-% MT3006 - LABORATORIO 7
+% MT3006 - LABORATORIO 8
 % -------------------------------------------------------------------------
 % Emplee el código base que se presenta a continuación para desarrollar un
-% EKF que permita estimar el estado de un robot móvil diferencial equipado
-% con encoders incrementales en sus ruedas y un GPS, según lo indicado en
-% la guía del laboratorio. Modifique sólo en los lugares del
-% código en donde se le indica.
+% EKF que permita la construcción del mapa con los obstáculos/landmarks
+% dados, según lo indicado en la guía del laboratorio. Modifique sólo en
+% los lugares del código en donde se le indica.
 % =========================================================================
 
 %% Parámetros de la simulación
 dt = 0.01; % período de muestreo
 t0 = 0; % tiempo inicial
-tf = 10; % tiempo final
+tf = 20; % tiempo final ***** PUEDE MODIFICAR ***** %init 20
 N = (tf-t0)/dt; % número de iteraciones
+
+%% Generación de landmarks 
+obs = [-2.14,  2.90, -3.80, -2.13, 4.97, -0.38,  3.59, -1.39, 2.18, -1.97;
+       -0.09, -2.64,  1.81,  2.99, 1.30, -4.56, -0.75,  0.08, 2.80,  4.46];
 
 %% Inicialización y condiciones iniciales
 % Condiciones iniciales 
-x0 = 0; % ***** PUEDE MODIFICAR ***** init 0
-y0 = 0; % ***** PUEDE MODIFICAR ***** init 0
-theta0 = pi/2; % ***** PUEDE MODIFICAR ***** init pi/2
+x0 = 0; % ***** PUEDE MODIFICAR *****   %init 0
+y0 = 0; % ***** PUEDE MODIFICAR *****   %init 0
+theta0 = pi/2; % ***** PUEDE MODIFICAR *****   %init pi/2
 
 xi0 = [x0; y0; theta0; 0; 0];
 mu0 = [0; 0];
@@ -38,53 +41,8 @@ GPS = zeros(2, N+1);
 ENC_R = zeros(1,N+1); 
 ENC_L = zeros(1,N+1); 
 
-%% ************************************************************************ 
-% variables robot movil    -(CP)-
-%**************************************************************************
-N_x = 256;    %flancos por revolucion (ticks)
-
-encoder_lticks_prev = 0;
-encoder_rticks_prev = 0;
-
-distancia_l = 381/1000; %distancia entre ruedas (m)
-r = 195/2000;           %radio de la rueda (m)
-
-load("varianzas_gps_enc.mat")
-%----------------------------------------------------------------------
-% Discretización de las matrices del proceso
-%----------------------------------------------------------------------
-A_k = @(x3,u1,w1) ([1, 0, -(u1+w1)*sin(x3);...
-                  0, 1, -(u1+w1)*cos(x3);...
-                  0, 0, 1]);
-
-B = @(x3) ([cos(x3), 0;...
-           sin(x3), 0;...
-           0, 1;]);
-
-F_k = @(x3) ([cos(x3),0;...
-              sin(x3),0;...
-              0,1]);
-
-C = [1, 0, 0;...
-     0, 1, 0;];
-
-D = zeros(2);
-
-%funcion del sistema no lineal F(x,u,w) 
-f = @(x,u,w)([x(1) + (u(1)+w(1))*cos(x(3));...
-              x(2) + (u(1)+w(1))*sin(x(3));...
-              x(3) +  u(2)+w(2)]);
-%----------------------------------------------------------------------
-% Inicialización de variables para el filtro (EKF)
-%----------------------------------------------------------------------
-xhat_prior = [x0;y0;theta0]; %% inialización variables del EKF
-xhat_post = [x0;y0;theta0];
-XHAT = [];
-
-P_prior = 0.3*ones(3);
-P_post = 0.3*ones(3); 
-
-%**************************************************************************
+% Inicialización del mapa (array de landmarks encontrados)
+map = zeros(2,10);
 
 %% Solución recursiva del sistema dinámico
 for n = 0:N
@@ -92,68 +50,29 @@ for n = 0:N
     % COLOCAR EL CONTROLADOR AQUÍ
     % *********************************************************************
     % Velocidades de las ruedas del robot
-    if n < (N/2)+100
-        phiR = 5;
-        phiL = 4;
-    else
-        phiR = 2;
-        phiL = 5;
-    end
+    phiR = 6;
+    phiL = 4;
     
     % Vector de entrada del sistema
     mu = [phiR; phiL];
-
     % *********************************************************************
     
     % Se adelanta un paso en la simulación del robot diferencial y se
     % obtienen las mediciones otorgadas por los sensores a bordo
     [gps_position, encoder_rticks, encoder_lticks, xi] = ...
         differential_drive(xi, mu, dt);
+    [range, bearing] = distance_sensor(xi, obs);
+    
+    % Posición y orientación real del robot
+    x = xi(1); y = xi(2); theta = xi(3);
     
     % *********************************************************************
-    % ESTIMAR EL ESTADO DEL ROBOT AQUÍ
+    % IMPLEMENTAR EL EKF PARA LA CONSTRUCCIÓN DEL MAPA AQUÍ
     % *********************************************************************
-    delta_rticks = encoder_rticks - encoder_rticks_prev;
-    delta_lticks = encoder_lticks - encoder_lticks_prev;
     
-    Dl = 2*pi*r*(delta_lticks/N_x);
-    Dr = 2*pi*r*(delta_rticks/N_x);
-
-    Dp = (Dr + Dl) / 2;     % cambio en desplazamiento lineal (u1)
-    d_theta = (Dr - Dl) / distancia_l;%cambio en desplazamiento angular(u2)
     
-    A = A_k(xhat_post(3),Dp,0);
-    F = F_k(xhat_post(3));    
-
-    encoder_lticks_prev = encoder_lticks;
-    encoder_rticks_prev = encoder_rticks;
-
-    
-
-    %----------------------------------------------------------------------
-    % Implementación del filtro de Kalman
-    %----------------------------------------------------------------------
-    % prediccion 
-    xhat_prior = f(xhat_post,[Dp,d_theta],[0,0]);
-    P_prior = A*P_post*A' + F*Qw*F';
-    
-    % corrección
-    yk = gps_position;
-    Lk = P_prior*C'*(Qv+C*P_prior*C')^-1;
-    xhat_post = xhat_prior + Lk*(yk-C*xhat_prior);
-    P_post = P_prior - Lk*C*P_prior;
-    
-    % actualización
-    xhat_prior = xhat_post;
-    P_prior = P_post;
-    trickR_k = encoder_rticks;
-    trickL_k = encoder_lticks;
-    % Se guarda la salida del filtro de Kalman ***NO MODIFICAR***
-    XHAT(:,end+1) = xhat_post;
-    
-
     % *********************************************************************
-
+    
     % Se guardan las trayectorias del estado y las entradas
     XI(:,n+1) = xi;
     MU(:,n+1) = mu;
@@ -165,11 +84,7 @@ for n = 0:N
     ENC_L(:,n+1) = encoder_lticks;
 end
 
-%Descomentar la siguiente linea si es la primera corrida
-%save("data_para_var.mat", "ENC_L", "ENC_R", "GPS")
-
 % Trayectoria real del estado del robot
-% ***** MODIFICAR PARA GRAFICAR ENCIMA EL ESTADO ESTIMADO *****
 figure;
 t = t0:dt:tf;
 plot(t, XI(1:3,:)', 'LineWidth', 1);
@@ -179,12 +94,9 @@ l = legend('$x(t)$', '$y(t)$', '$\theta(t)$', 'Location', 'best', ...
     'Orientation', 'vertical');
 set(l, 'Interpreter', 'latex', 'FontSize', 12);
 grid minor;
-hold on;
-plot(t,XHAT(1:3,:)','--', 'LineWidth', 1);
-hold off;
 
 % Factor de escala para el "mundo" del robot
-sf = 6; %***** PUEDE MODIFICAR *****
+sf = 5; 
 
 
 %% Animación y generación de figuras (NO modificar)
@@ -216,6 +128,11 @@ hold on;
 q = XI(:,1);
 x = q(1); y = q(2); theta = q(3);
 
+obstacles = scatter(obs(1,:), obs(2,:), 'r', 'filled');
+sensor_plot = gobjects(1,10);
+for i = 1:length(obs)
+    sensor_plot(i) = plot([xi(1),xi(1)], [xi(2),xi(2)], '--b', 'LineWidth', 1);
+end
 trajplot = plot(x, y, '--k', 'LineWidth', 1);
 
 BV = [-0.1, 0, 0.1; 0, 0.3, 0];
@@ -230,6 +147,16 @@ hold off;
 for n = 2:N+1
     q = XI(:,n);
     x = q(1); y = q(2); theta = q(3);
+    
+    for i = 1:length(obs)
+        if(norm(obs(:,i) - q(1:2)) <= 2)
+            sensor_plot(i).XData = [x, obs(1,i)];
+            sensor_plot(i).YData = [y, obs(2,i)];
+        else
+            sensor_plot(i).XData = [x, x];
+            sensor_plot(i).YData = [y, y];
+        end
+    end
     
     trajplot.XData = [trajplot.XData, x];
     trajplot.YData = [trajplot.YData, y];

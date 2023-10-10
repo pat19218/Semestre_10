@@ -4,8 +4,8 @@ load data_para_var.mat
 %% Parametros
 N_x = 256;    %flancos por revolucion (ticks)
 
-distancia_l = 381;      %distancia entre ruedas (mm)
-r = 195;    %radio de la rueda(mm)
+distancia_l = 381/1000;      %distancia entre ruedas (m)
+r = 195/1000;    %radio de la rueda(m)
 
 %% Parámetros de la simulación
 dt = 0.01; % período de muestreo
@@ -23,14 +23,14 @@ d_theta = zeros(1,N+1);
 %% vector para encoders
 
 for n = 2:N
-    delta_rticks(:,n) = ENC_L(n) - ENC_L(n-1);
-    delta_lticks(:,n) = ENC_R(n) - ENC_R(n-1);
+    delta_rticks(1,n) = ENC_L(1,n) - ENC_L(1,(n-1));
+    delta_lticks(1,n) = ENC_R(1,n) - ENC_R(1,(n-1));
     
-    Dl = 2*pi*r*(delta_lticks/N_x);
-    Dr = 2*pi*r*(delta_rticks/N_x);
+    Dl(1,n) = 2*pi*r*(delta_lticks(1,n)/N_x);
+    Dr(1,n) = 2*pi*r*(delta_rticks(1,n)/N_x);
     
-    Dc = (Dr + Dl) / 2;     % cambio en desplazamiento lineal 
-    d_theta = (Dr - Dl) / distancia_l;% cambio en desplazamiento angular
+    Dc(1,n) = (Dr(1,n) + Dl(1,n)) / 2;     % cambio en desplazamiento lineal 
+    d_theta(1,n) = (Dr(1,n) - Dl(1,n)) / distancia_l;% cambio en desplazamiento angular
 end
 
 %% Varianzas
