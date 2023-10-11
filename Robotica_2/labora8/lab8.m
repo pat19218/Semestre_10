@@ -61,6 +61,7 @@ for n = 0:N
     % obtienen las mediciones otorgadas por los sensores a bordo
     [gps_position, encoder_rticks, encoder_lticks, xi] = ...
         differential_drive(xi, mu, dt);
+
     [range, bearing] = distance_sensor(xi, obs);
     
     % Posición y orientación real del robot
@@ -69,6 +70,7 @@ for n = 0:N
     % *********************************************************************
     % IMPLEMENTAR EL EKF PARA LA CONSTRUCCIÓN DEL MAPA AQUÍ
     % *********************************************************************
+    
     
     
     % *********************************************************************
