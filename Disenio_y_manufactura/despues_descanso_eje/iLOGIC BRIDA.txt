@@ -1,0 +1,41 @@
+'RUTINA PRINCIPAL QUE ASIGNA LA FILA DEL ARCHIVO DE EXCEL "BRIDAS" DEPENDIENDO DE LA PRESION SELECCIONADA y EL TAMAÑO NOMINAL.
+
+'Sub Main()
+'If Presion = "150" Then
+'GoExcel.FindRow("C:\Users\rodar\OneDrive\Desktop\INVENTOR\UVG\iLOGIC\BRIDAS.xlsx", "150 psi", "DN", "=", Tamaño_brida)
+'iProperties.Material = "Aluminum 6061"
+'iProperties.PartColor = "Smooth - Yellow"
+'ElseIf Presion = "300" Then
+'GoExcel.FindRow("C:\Users\rodar\OneDrive\Desktop\INVENTOR\UVG\iLOGIC\BRIDAS.xlsx", "300 psi", "DN", "=", Tamaño_brida)
+'iProperties.Material = "Steel"
+'iProperties.PartColor = "Light Red"
+'End If
+
+'Call Mod_Brida
+'End Sub
+
+''SUBRUTINA QUE ACTUALIZA TODOS LOS PARAMETROS (DIMENSIONES NOMBRADAS) A PARTIR DE LA PRESION y TAMAÑO SELECCIONADO.
+''TODOS LOS FACTORES SE MULTIPLICAN POR 25.4 POR QUE LAS UNIDADES DEL ARCHIVO DE EXCEL SON PULGADAS.
+''TAMBIEN ASIGNA EL COLOR DE LA BRIDA
+''PARA CALCULAR EL DIAMETRO EXTERIOR DE LA RANURA, SE UTILIZA Floor PARA TRABAJAR CON TAMAÑO ESTANDAR DE O-RING.
+'Private Sub Mod_Brida()
+'D = GoExcel.CurrentRowValue("D")*25.4
+'dia_J = GoExcel.CurrentRowValue("J")*25.4
+'espesor_b = GoExcel.CurrentRowValue("b")*25.4
+'altura_h = GoExcel.CurrentRowValue("h")*25.4
+'dia_a = GoExcel.CurrentRowValue("a")*25.4
+'dia_m = GoExcel.CurrentRowValue("m")*25.4
+'dia_res_g = GoExcel.CurrentRowValue("g")*25.4
+'cant_agujero = GoExcel.CurrentRowValue("Number")
+'dia_l = GoExcel.CurrentRowValue("l")*25.4
+'BCD_k = GoExcel.CurrentRowValue("k")*25.4
+
+
+'If ranura_oring = "True" Then
+'Feature.IsActive("RANURA_ORING:1") = True
+'RANURA_ORING:1:d_ext = Floor(dia_res_g/25.4)*25.4 - 6.35
+'Else
+'Feature.IsActive("RANURA_ORING:1") = False
+'End If
+
+'End Sub

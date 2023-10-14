@@ -84,10 +84,22 @@ def pose_estimation(frame, aruco_dict_type, matrix_coefficients, distortion_coef
             markerPoints3D = np.array([[0, 0, 0], [0, 0.02, 0], [0.02, 0, 0], [0.02, 0.02, 0]])
 
             # Estimate the pose of the ArUco marker using solvePnP().
-            rvec, tvec, _ = cv2.solvePnP(markerPoints3D, markerPoints, matrix_coefficients, distortion_coefficients)
+            succes, rvec, tvec = cv2.solvePnP(markerPoints3D, markerPoints, matrix_coefficients, distortion_coefficients)
                        
             cv2.aruco.drawDetectedMarkers(frame, corners) 
-
+            
+            # Extraer la traslación (tvec) del marcador
+            translation = rvec
+            #print(rvec)
+            
+            # Calcular la distancia euclidiana desde la cámara al marcador
+            #distance = np.linalg.norm(translation)
+            distance = round(np.linalg.norm(translation), 2)
+            
+            
+            # Imprimir la distancia
+            print(f"Distancia al marcador {ids[i]}: {distance} metros")
+			
             #cv2.aruco.drawAxis(frame, matrix_coefficients, distortion_coefficients, rvec, tvec, 0.01)  
             
             

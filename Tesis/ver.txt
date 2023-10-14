@@ -1,9 +1,0 @@
-generacionalgoritmo.mlapp -- linea 455
-	Se usan para Tiempo continuo
-		*FeaturesV2
-	se usan para wavelet
-		*FeaturesV2wavelet
-	se usan para frecuencia
-		*FeaturesV3frecuencia
-
-
