@@ -89,8 +89,8 @@ def pose_estimation(frame, aruco_dict_type, matrix_coefficients, distortion_coef
             cv2.aruco.drawDetectedMarkers(frame, corners) 
             
             # Extraer la traslación (tvec) del marcador
-            translation = rvec
-            #print(rvec)
+            translation = tvec
+            print(tvec)
             
             # Calcular la distancia euclidiana desde la cámara al marcador
             #distance = np.linalg.norm(translation)
