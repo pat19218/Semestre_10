@@ -1,6 +1,18 @@
 import numpy as np
 import cv2
+import sys
+import time
 
+""" 
+Para usar este codigo necesitas la version 4.5.5.64 de openCV
+
+Si ya tienes instalada otra entonces:
+	pip uninstall opencv-python -y
+	pip uninstall opencv-contrib-python -y
+	
+	 pip install opencv-contrib-python==4.5.5.64
+	
+"""
 
 ARUCO_DICT = {
 	"DICT_4X4_50": cv2.aruco.DICT_4X4_50,
@@ -58,51 +70,28 @@ def aruco_display(corners, ids, rejected, image):
 	return image
 
 
+
 def pose_estimation(frame, aruco_dict_type, matrix_coefficients, distortion_coefficients):
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    #cv2.aruco_dict = cv2.aruco.Dictionary_get(aruco_dict_type) #API changed for 4.7.x
-    cv2.aruco_dict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[aruco_type])
-    #parameters = cv2.aruco.DetectorParameters_create() #API changed for 4.7.x
-    parameters = cv2.aruco.DetectorParameters()
-    """
+    cv2.aruco_dict = cv2.aruco.Dictionary_get(aruco_dict_type)
+    parameters = cv2.aruco.DetectorParameters_create()
+
+	
     corners, ids, rejected_img_points = cv2.aruco.detectMarkers(gray, cv2.aruco_dict,parameters=parameters,
         cameraMatrix=matrix_coefficients,
         distCoeff=distortion_coefficients)
-    """    #API changed for 4.7.x
-    
-    detector = cv2.aruco.ArucoDetector(cv2.aruco_dict, parameters)
-    corners, ids, rejected_img_points = detector.detectMarkers(gray) #API changed for 4.7.x
+
         
     if len(corners) > 0:
         for i in range(0, len(ids)):
            
-            #rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.02, matrix_coefficients, distortion_coefficients) #API changed for 4.7.x
+            rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.02, matrix_coefficients,
+                                                                       distortion_coefficients)
             
-            # Convert the ArUco marker corners to 3D points.
-            markerPoints = corners[i].reshape((4, 2)).astype(np.float32)
-            markerPoints3D = np.array([[0, 0, 0], [0, 0.02, 0], [0.02, 0, 0], [0.02, 0.02, 0]])
-
-            # Estimate the pose of the ArUco marker using solvePnP().
-            succes, rvec, tvec = cv2.solvePnP(markerPoints3D, markerPoints, matrix_coefficients, distortion_coefficients)
-                       
             cv2.aruco.drawDetectedMarkers(frame, corners) 
-            
-            # Extraer la traslación (tvec) del marcador
-            translation = tvec
-            print(translation)
-            
-            # Calcular la distancia euclidiana desde la cámara al marcador
-            #distance = np.linalg.norm(translation)
-            distance = round(np.linalg.norm(translation), 2)
-            
-            
-            # Imprimir la distancia
-            print(f"Distancia al marcador {ids[i]}: {distance} metros")
-			
-            #cv2.aruco.drawAxis(frame, matrix_coefficients, distortion_coefficients, rvec, tvec, 0.01)  
-            
-            
+
+            cv2.aruco.drawAxis(frame, matrix_coefficients, distortion_coefficients, rvec, tvec, 0.01)  
 
     return frame
 
@@ -111,11 +100,9 @@ def pose_estimation(frame, aruco_dict_type, matrix_coefficients, distortion_coef
 
 aruco_type = "DICT_5X5_100"
 
-#arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[aruco_type]) #API changed for 4.7.x
-arucoDict = cv2.aruco.getPredefinedDictionary(ARUCO_DICT[aruco_type])
+arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[aruco_type])
 
-#arucoParams = cv2.aruco.DetectorParameters_create()#API changed for 4.7.x
-arucoParams = cv2.aruco.DetectorParameters()
+arucoParams = cv2.aruco.DetectorParameters_create()
 
 
 intrinsic_camera = np.array(((933.15867, 0, 657.59),(0,933.1586, 400.36993),(0,0,1)))
@@ -143,5 +130,3 @@ while cap.isOpened():
 
 cap.release()
 cv2.destroyAllWindows()
-
-"ref: https://github.com/niconielsen32/ComputerVision"
