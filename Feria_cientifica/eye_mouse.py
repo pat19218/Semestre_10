@@ -128,27 +128,27 @@ def main():
                         screen_y_last = screen_y
                         
         
-        # Ojo izquierdo        
-        left = [landmarks[145], landmarks[159]]
-        for landmark in left:
-            x = int(landmark.x * frame_w)
-            y = int(landmark.y * frame_h)
-            cv2.circle(frame, (x,y),int(3/zoom_factor),(0,255,255))
-        #print(left[0].y - left[1].x)
-        
-        # nariz
-        nose = [landmarks[8]] #473
-        for landmark in nose:
-            x_nose = int(landmark.x * frame_w)
-            y_nose = int(landmark.y * frame_h)
-            cv2.circle(frame, (x_nose,y_nose),int(3/zoom_factor),(0,255,255))
-        
-        #union parpado
-        par = [landmarks[353]] 
-        for landmark in par:
-            x_par = int(landmark.x * frame_w)
-            y_par = int(landmark.y * frame_h)
-            cv2.circle(frame, (x_par,y_par),int(3/zoom_factor),(0,255,255))
+                # Ojo izquierdo        
+                left = [landmarks[145], landmarks[159]]
+                for landmark in left:
+                    x = int(landmark.x * frame_w)
+                    y = int(landmark.y * frame_h)
+                    cv2.circle(frame, (x,y),int(3/zoom_factor),(0,255,255))
+                #print(left[0].y - left[1].x)
+                
+                # nariz
+                nose = [landmarks[8]] #473
+                for landmark in nose:
+                    x_nose = int(landmark.x * frame_w)
+                    y_nose = int(landmark.y * frame_h)
+                    cv2.circle(frame, (x_nose,y_nose),int(3/zoom_factor),(0,255,255))
+                
+                #union parpado
+                par = [landmarks[353]] 
+                for landmark in par:
+                    x_par = int(landmark.x * frame_w)
+                    y_par = int(landmark.y * frame_h)
+                    cv2.circle(frame, (x_par,y_par),int(3/zoom_factor),(0,255,255))
         # ***********************
         # Get the center coordinates of the frame
         center_x, center_y = frame.shape[1] // 2, frame.shape[0] // 2

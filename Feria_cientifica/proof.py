@@ -1,132 +1,97 @@
-import numpy as np
+# Feria Científica UVG 2do Ciclo 2023
+# Control de Mouse con el ojo
+
+
 import cv2
-import sys
-import time
+import mediapipe as mp
+import pyautogui
+# +-+-+-+-+-+-+-+-+-+-+-+- Funciones  +-+-+-+-+-+-+-+-+-+-+-+-
+def digital_zoom(frame, zoom_factor, zoom_center):
+    h, w = frame.shape[:2]
+    x, y = zoom_center
 
-""" 
-Para usar este codigo necesitas la version 4.5.5.64 de openCV
+    # Calculate the new width and height based on the zoom factor
+    new_w = int(w / zoom_factor)
+    new_h = int(h / zoom_factor)
 
-Si ya tienes instalada otra entonces:
-	pip uninstall opencv-python -y
-	pip uninstall opencv-contrib-python -y
-	
-	 pip install opencv-contrib-python==4.5.5.64
-	
-"""
+    # Define the region of interest (ROI) for zooming
+    x1 = max(0, x - new_w // 2)
+    y1 = max(0, y - new_h // 2)
+    x2 = min(w, x + new_w // 2)
+    y2 = min(h, y + new_h // 2)
 
-ARUCO_DICT = {
-	"DICT_4X4_50": cv2.aruco.DICT_4X4_50,
-	"DICT_4X4_100": cv2.aruco.DICT_4X4_100,
-	"DICT_4X4_250": cv2.aruco.DICT_4X4_250,
-	"DICT_4X4_1000": cv2.aruco.DICT_4X4_1000,
-	"DICT_5X5_50": cv2.aruco.DICT_5X5_50,
-	"DICT_5X5_100": cv2.aruco.DICT_5X5_100,
-	"DICT_5X5_250": cv2.aruco.DICT_5X5_250,
-	"DICT_5X5_1000": cv2.aruco.DICT_5X5_1000,
-	"DICT_6X6_50": cv2.aruco.DICT_6X6_50,
-	"DICT_6X6_100": cv2.aruco.DICT_6X6_100,
-	"DICT_6X6_250": cv2.aruco.DICT_6X6_250,
-	"DICT_6X6_1000": cv2.aruco.DICT_6X6_1000,
-	"DICT_7X7_50": cv2.aruco.DICT_7X7_50,
-	"DICT_7X7_100": cv2.aruco.DICT_7X7_100,
-	"DICT_7X7_250": cv2.aruco.DICT_7X7_250,
-	"DICT_7X7_1000": cv2.aruco.DICT_7X7_1000,
-	"DICT_ARUCO_ORIGINAL": cv2.aruco.DICT_ARUCO_ORIGINAL,
-	"DICT_APRILTAG_16h5": cv2.aruco.DICT_APRILTAG_16h5,
-	"DICT_APRILTAG_25h9": cv2.aruco.DICT_APRILTAG_25h9,
-	"DICT_APRILTAG_36h10": cv2.aruco.DICT_APRILTAG_36h10,
-	"DICT_APRILTAG_36h11": cv2.aruco.DICT_APRILTAG_36h11
-}
+    # Zoom in on the ROI
+    zoomed_frame = frame[y1:y2, x1:x2]
 
-def aruco_display(corners, ids, rejected, image):
-    
-	if len(corners) > 0:
-		
-		ids = ids.flatten()
-		
-		for (markerCorner, markerID) in zip(corners, ids):
-			
-			corners = markerCorner.reshape((4, 2))
-			(topLeft, topRight, bottomRight, bottomLeft) = corners
-			
-			topRight = (int(topRight[0]), int(topRight[1]))
-			bottomRight = (int(bottomRight[0]), int(bottomRight[1]))
-			bottomLeft = (int(bottomLeft[0]), int(bottomLeft[1]))
-			topLeft = (int(topLeft[0]), int(topLeft[1]))
+    # Resize the zoomed frame to the original frame size
+    zoomed_frame = cv2.resize(zoomed_frame, (w, h))
 
-			cv2.line(image, topLeft, topRight, (0, 255, 0), 2)
-			cv2.line(image, topRight, bottomRight, (0, 255, 0), 2)
-			cv2.line(image, bottomRight, bottomLeft, (0, 255, 0), 2)
-			cv2.line(image, bottomLeft, topLeft, (0, 255, 0), 2)
-			
-			cX = int((topLeft[0] + bottomRight[0]) / 2.0)
-			cY = int((topLeft[1] + bottomRight[1]) / 2.0)
-			cv2.circle(image, (cX, cY), 4, (0, 0, 255), -1)
-			
-			cv2.putText(image, str(markerID),(topLeft[0], topLeft[1] - 10), cv2.FONT_HERSHEY_SIMPLEX,
-				0.5, (0, 255, 0), 2)
-			print("[Inference] ArUco marker ID: {}".format(markerID))
-			
-	return image
+    return zoomed_frame
+# +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+- 
 
 
 
-def pose_estimation(frame, aruco_dict_type, matrix_coefficients, distortion_coefficients):
+cam = cv2.VideoCapture(0)
+if not cam.isOpened():
+    raise IOError("Cannot open webcam")
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cv2.aruco_dict = cv2.aruco.Dictionary_get(aruco_dict_type)
-    parameters = cv2.aruco.DetectorParameters_create()
+face_mesh = mp.solutions.face_mesh.FaceMesh(refine_landmarks=True)
+screen_w, screen_h = pyautogui.size()
 
-	
-    corners, ids, rejected_img_points = cv2.aruco.detectMarkers(gray, cv2.aruco_dict,parameters=parameters,
-        cameraMatrix=matrix_coefficients,
-        distCoeff=distortion_coefficients)
-
-        
-    if len(corners) > 0:
-        for i in range(0, len(ids)):
-           
-            rvec, tvec, markerPoints = cv2.aruco.estimatePoseSingleMarkers(corners[i], 0.02, matrix_coefficients,
-                                                                       distortion_coefficients)
-            
-            cv2.aruco.drawDetectedMarkers(frame, corners) 
-
-            cv2.aruco.drawAxis(frame, matrix_coefficients, distortion_coefficients, rvec, tvec, 0.01)  
-
-    return frame
-
+while True:
+    _,frame = cam.read()
 
     
-
-aruco_type = "DICT_5X5_100"
-
-arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[aruco_type])
-
-arucoParams = cv2.aruco.DetectorParameters_create()
-
-
-intrinsic_camera = np.array(((933.15867, 0, 657.59),(0,933.1586, 400.36993),(0,0,1)))
-distortion = np.array((-0.43948,0.18514,0,0))
-
-
-cap = cv2.VideoCapture(0)
-
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-
-
-
-while cap.isOpened():
     
-    ret, img = cap.read()
+    frame = cv2.flip(frame,1)
+    rgb_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+    output = face_mesh.process(rgb_frame)
+    landmark_points = output.multi_face_landmarks
+    frame_h,frame_w,_ = frame.shape
+
+    # Ojo derecho
+    if landmark_points:
+        landmarks = landmark_points[0].landmark
+        for id, landmark in enumerate(landmarks[474:478]):
+            x = int(landmark.x * frame_w)
+            y = int(landmark.y * frame_h)
+            cv2.circle(frame, (x,y),3,(0,255,0))
+            if id == 1:
+                screen_x = screen_w / frame_w *x
+                screen_y = screen_h / frame_h *y
+                pyautogui.moveTo(screen_x,screen_y)
     
-    output = pose_estimation(img, ARUCO_DICT[aruco_type], intrinsic_camera, distortion)
+    # Ojo izquierdo        
+    left = [landmarks[145], landmarks[159]]
+    for landmark in left:
+        x = int(landmark.x * frame_w)
+        y = int(landmark.y * frame_h)
+        cv2.circle(frame, (x,y),3,(0,255,255))
+    print(left[0].y - left[1].x)
+    
+    # nariz
+    nose = [landmarks[473]]
+    for landmark in nose:
+        x_nose = int(landmark.x * frame_w)
+        y_nose = int(landmark.y * frame_h)
+        cv2.circle(frame, (x_nose,y_nose),3,(0,255,255))
 
-    cv2.imshow('Estimated Pose', output)
+    # ***********************
+     # Get the center coordinates of the frame
+    center_x, center_y = frame.shape[1] // 2, frame.shape[0] // 2
 
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord('q'):
-        break
+    # Zoom factor (increase this value to zoom in)
+    zoom_factor = 5 
 
-cap.release()
-cv2.destroyAllWindows()
+    # Apply digital zoom to the frame
+    frame = digital_zoom(frame, zoom_factor, (x_nose, y_nose))
+    # ***********************
+    
+    """if left[0].y - left[1].x < 0.035:
+        print("click")
+        pyautogui.click()
+        pyautogui.sleep(1)
+    """
+    
+    cv2.imshow('Eye controlled mouse',frame)
+    cv2.waitKey(1)
