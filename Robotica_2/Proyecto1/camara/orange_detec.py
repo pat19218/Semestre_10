@@ -5,6 +5,13 @@
 import sensor
 import time
 import math
+from pyb import UART
+
+# Always pass UART 3 for the UART number for your OpenMV Cam.
+# The second argument is the UART baud rate. For a more advanced UART control
+# example see the BLE-Shield driver.
+uart = UART(3, 115200)
+
 
 threshold_index = 3  # 0 for red, 1 for green, 2 for blue, 3 naranja
 
@@ -47,8 +54,10 @@ while True:
         img.draw_rectangle(blob.rect())
         img.draw_cross(blob.cx(), blob.cy())
         print("Centro x: ", blob.cx(), "     Centro y: ", blob.cy())
+        uart.write("X: " + str(blob.cx()) + "\n")
+        uart.write("Y: " + str(blob.cy()) + "\n")
         # Note - the blob rotation is unique to 0-180 only.
         img.draw_keypoints(
             [(blob.cx(), blob.cy(), int(math.degrees(blob.rotation())))], size=20
         )
-    print(clock.fps())
+    #print(clock.fps())
