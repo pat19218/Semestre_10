@@ -11,6 +11,7 @@ from pyb import UART
 # The second argument is the UART baud rate. For a more advanced UART control
 # example see the BLE-Shield driver.
 uart = UART(3, 115200)
+uart.init(115200, bits=8, parity=None, stop=1) # init with given parameters
 
 
 threshold_index = 3  # 0 for red, 1 for green, 2 for blue, 3 naranja
@@ -55,12 +56,14 @@ while True:
         img.draw_cross(blob.cx(), blob.cy())
         print("Centro x: ", blob.cx(), "     Centro y: ", blob.cy())
 
-        msg_in = uart.read()
-        print (msg_in)
-        if msg_in == "x":
-            uart.write(str(blob.cx()))
-        elif msg_in == "y":
-            uart.write(str(blob.cy()))
+        msg_in = uart.readchar()
+        print(msg_in)
+        if msg_in == 49:
+            uart.write(str(blob.cx()) + "x")
+        if msg_in == 50:
+            uart.write(str(blob.cy()) + "y")
+
+
 
         # Note - the blob rotation is unique to 0-180 only.
         img.draw_keypoints(

@@ -17,7 +17,17 @@ String y = "";
 int pos_x = 0;
 int pos_y = 0;
 
-byte tread = 100; 
+byte tread = 100;
+
+byte centrox = 200;
+byte centroy = 200;
+byte errorx = 0;
+byte errory = 0;
+
+float kpv = 0.1;
+float kpw = 0.1;
+float v = 0;
+float w = 0;
 
 // ================================================================================
 // Funcionamiento básico del robot, ***NO MODIFICAR***
@@ -97,10 +107,14 @@ visual_servoing_task(void * p_params)
     Serial.println(pos_x);
     Serial.print("Dato y :    ");
     Serial.println(pos_y);
-
-    delay(90);
+    
     x = "";
     y = "";
+
+    errorx = pos_x - centrox; 
+
+
+    delay(90);
     
   }
 }
