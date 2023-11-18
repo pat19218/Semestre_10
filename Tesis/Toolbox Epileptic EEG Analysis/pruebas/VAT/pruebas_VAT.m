@@ -7,4 +7,4 @@ M = 100;
 general = [Features_result.CarIctal.VectorCaracteristicasIctal(ind_aleatorio1(1:M),:);...
            Features_result.CarSano.VectorCaracteristicasSano(ind_aleatorio2(1:M),:)];
 
-[D, P]=VAT_2(general, 3);
+[D, P]=VAT_2(general, M);
