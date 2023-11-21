@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\build\windows\CMakeFiles\5f6107d3e0152a6d49034ab0d79f95f6\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\GKlib\GKlibSystem.cmake">
+      <Filter>Buildsystem Input Files\GKlib</Filter>
+    </None>
+    <None Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\include\CMakeLists.txt">
+      <Filter>Buildsystem Input Files\include</Filter>
+    </None>
+    <None Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\libmetis\CMakeLists.txt">
+      <Filter>Buildsystem Input Files\libmetis</Filter>
+    </None>
+    <None Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\CMakeLists.txt">
+      <Filter>Buildsystem Input Files\programs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{49498F88-7D69-3EBA-AA4A-22A0FF080185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buildsystem Input Files\GKlib">
+      <UniqueIdentifier>{62E2B2DA-4FCB-3C72-ABED-0026F6C4855D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buildsystem Input Files\include">
+      <UniqueIdentifier>{92350F2F-4434-3F81-9A80-B5403ACEC7EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buildsystem Input Files\libmetis">
+      <UniqueIdentifier>{461C1C53-D0FD-3FC8-A040-BE966E60E4A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buildsystem Input Files\programs">
+      <UniqueIdentifier>{D1A5827A-9D86-3C11-9578-B36BD49160AF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

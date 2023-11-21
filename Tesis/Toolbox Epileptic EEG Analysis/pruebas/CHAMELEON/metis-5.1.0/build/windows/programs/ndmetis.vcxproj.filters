@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\ndmetis.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\cmdline_ndmetis.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\io.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\smbfactor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0E20FDBB-4AB5-3066-8CF2-D669130B6934}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

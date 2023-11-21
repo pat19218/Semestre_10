@@ -1,0 +1,26 @@
+******************************************************************************
+			Instalar make
+******************************************************************************
+
+Descargar minGW
+	https://sourceforge.net/projects/mingw/
+
+	Ejecutar el instalable
+		Desactivar la opción de interfaz grafica
+
+	Una vez instalado dirigirse a "C://" y buscar la carpeta "MinGW"
+	ir a "Bin" y agregarlo a variables de entorno (path)
+
+Instalar make
+	Abrir una ventanad de comandos (CMD)
+	
+	
+	Ejecutar
+		mingw-get install mingw32-make
+
+	Una vez instalado en la carpeta "bin" cambiar de nombre 
+	"mingw32-make" a "make"
+
+	Ejecutar
+		make --version
+Listo!

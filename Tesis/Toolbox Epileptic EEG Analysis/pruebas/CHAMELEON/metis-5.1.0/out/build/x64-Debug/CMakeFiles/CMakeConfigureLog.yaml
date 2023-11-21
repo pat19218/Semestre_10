@@ -1,0 +1,204 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake:204 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.19045 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Compilador de optimización de C/C++ de Microsoft (R) versión 19.36.32537 para x64
+      (C) Microsoft Corporation. Todos los derechos reservados.
+      
+      CMakeCCompilerId.c
+      Microsoft (R) Incremental Linker Version 14.36.32537.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCCompilerId.exe 
+      CMakeCCompilerId.obj 
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+      
+      The C compiler identification is MSVC, found in:
+        C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/3.26.0-msvc3/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:1153 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:221 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        main.c
+        Nota: inclusión del archivo: C:\\Users\\Cris Pat\\Desktop\\U\\Semestre_10\\Tesis\\Toolbox Epileptic EEG Analysis\\pruebas\\CHAMELEON\\metis-5.1.0\\out\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Nota: inclusión del archivo: "
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Compilador de optimización de C/C++ de Microsoft (R) versión 19.36.32537 para x64
+      (C) Microsoft Corporation. Todos los derechos reservados.
+      
+      CMakeCXXCompilerId.cpp
+      Microsoft (R) Incremental Linker Version 14.36.32537.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCXXCompilerId.exe 
+      CMakeCXXCompilerId.obj 
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+      
+      The CXX compiler identification is MSVC, found in:
+        C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/3.26.0-msvc3/CompilerIdCXX/CMakeCXXCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:1153 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:221 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        main.c
+        Nota: inclusión del archivo: C:\\Users\\Cris Pat\\Desktop\\U\\Semestre_10\\Tesis\\Toolbox Epileptic EEG Analysis\\pruebas\\CHAMELEON\\metis-5.1.0\\out\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Nota: inclusión del archivo: "
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i8y3oy"
+      binary: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i8y3oy"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i8y3oy
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_8fce4 && [1/2] "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /DWIN32 /D_WINDOWS /W3  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_8fce4.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_8fce4.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_8fce4.dir --rc="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_8fce4.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_8fce4.exe /implib:cmTC_8fce4.lib /pdb:cmTC_8fce4.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fxyjz6"
+      binary: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fxyjz6"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fxyjz6
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_a6c22 && [1/2] "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe"  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_a6c22.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_a6c22.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_a6c22.dir --rc="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_a6c22.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_a6c22.exe /implib:cmTC_a6c22.lib /pdb:cmTC_a6c22.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CheckIncludeFile.cmake:95 (try_compile)"
+      - "GKlib/GKlibSystem.cmake:93 (check_include_file)"
+      - "CMakeLists.txt:20 (include)"
+    checks:
+      - "Looking for execinfo.h"
+    directories:
+      source: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ndyuuc"
+      binary: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ndyuuc"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_EXECINFO_H"
+      cached: true
+      stdout: |
+        Change Dir: C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ndyuuc
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_ce195 && [1/2] "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /DWIN32 /D_WINDOWS /W3  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_ce195.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_ce195.dir\\ /FS -c "C:\\Users\\Cris Pat\\Desktop\\U\\Semestre_10\\Tesis\\Toolbox Epileptic EEG Analysis\\pruebas\\CHAMELEON\\metis-5.1.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ndyuuc\\CheckIncludeFile.c"
+        FAILED: CMakeFiles/cmTC_ce195.dir/CheckIncludeFile.c.obj 
+        "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /DWIN32 /D_WINDOWS /W3  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_ce195.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_ce195.dir\\ /FS -c "C:\\Users\\Cris Pat\\Desktop\\U\\Semestre_10\\Tesis\\Toolbox Epileptic EEG Analysis\\pruebas\\CHAMELEON\\metis-5.1.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ndyuuc\\CheckIncludeFile.c"
+        C:\\Users\\Cris Pat\\Desktop\\U\\Semestre_10\\Tesis\\Toolbox Epileptic EEG Analysis\\pruebas\\CHAMELEON\\metis-5.1.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ndyuuc\\CheckIncludeFile.c(1): fatal error C1083: No se puede abrir el archivo incluir: 'execinfo.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CheckFunctionExists.cmake:91 (try_compile)"
+      - "GKlib/GKlibSystem.cmake:98 (check_function_exists)"
+      - "CMakeLists.txt:20 (include)"
+    checks:
+      - "Looking for getline"
+    directories:
+      source: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-70pbkm"
+      binary: "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-70pbkm"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+    buildResult:
+      variable: "HAVE_GETLINE"
+      cached: true
+      stdout: |
+        Change Dir: C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-70pbkm
+        
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_e31f0 && [1/2] "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe"  /nologo   /DWIN32 /D_WINDOWS /W3 -DCHECK_FUNCTION_EXISTS=getline /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_e31f0.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_e31f0.dir\\ /FS -c "C:\\Users\\Cris Pat\\Desktop\\U\\Semestre_10\\Tesis\\Toolbox Epileptic EEG Analysis\\pruebas\\CHAMELEON\\metis-5.1.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-70pbkm\\CheckFunctionExists.c"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_e31f0.dir --rc="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_e31f0.dir\\CheckFunctionExists.c.obj  /out:cmTC_e31f0.exe /implib:cmTC_e31f0.lib /pdb:cmTC_e31f0.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_e31f0.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_e31f0.dir --rc="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\rc.exe" --mt="C:\\PROGRA~2\\Windows Kits\\10\\bin\\10.0.22621.0\\x64\\mt.exe" --manifests  -- "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\link.exe" /nologo CMakeFiles\\cmTC_e31f0.dir\\CheckFunctionExists.c.obj  /out:cmTC_e31f0.exe /implib:cmTC_e31f0.lib /pdb:cmTC_e31f0.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e31f0.dir\\CheckFunctionExists.c.obj /out:cmTC_e31f0.exe /implib:cmTC_e31f0.lib /pdb:cmTC_e31f0.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_e31f0.dir/intermediate.manifest CMakeFiles\\cmTC_e31f0.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: símbolo externo getline sin resolver al que se hace referencia en la función main\x0d
+        cmTC_e31f0.exe : fatal error LNK1120: 1 externos sin resolver\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+...

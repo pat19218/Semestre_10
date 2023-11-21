@@ -1,0 +1,159 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "include",
+					"jsonFile" : "directory-include-Debug-d173e0f0f2f3c2971879.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "include"
+				},
+				{
+					"build" : "libmetis",
+					"jsonFile" : "directory-libmetis-Debug-73ccc39b3c06a1efdc06.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "libmetis",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "programs",
+					"jsonFile" : "directory-programs-Debug-95654c7abf89d881f526.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "programs",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"name" : "METIS",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 3,
+					"id" : "cmpfillin::@8e422c029f6fe140fec0",
+					"jsonFile" : "target-cmpfillin-Debug-ee7fd8225549998435ef.json",
+					"name" : "cmpfillin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "gpmetis::@8e422c029f6fe140fec0",
+					"jsonFile" : "target-gpmetis-Debug-bd49771316493f827068.json",
+					"name" : "gpmetis",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "graphchk::@8e422c029f6fe140fec0",
+					"jsonFile" : "target-graphchk-Debug-5c201e07861ea29abeba.json",
+					"name" : "graphchk",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "m2gmetis::@8e422c029f6fe140fec0",
+					"jsonFile" : "target-m2gmetis-Debug-8e559748aac0e42f636c.json",
+					"name" : "m2gmetis",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "metis::@fdf3bd5de051f36f4a85",
+					"jsonFile" : "target-metis-Debug-a6b6e5ad10ff4804a226.json",
+					"name" : "metis",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "mpmetis::@8e422c029f6fe140fec0",
+					"jsonFile" : "target-mpmetis-Debug-92d41b0a16c06d717711.json",
+					"name" : "mpmetis",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "ndmetis::@8e422c029f6fe140fec0",
+					"jsonFile" : "target-ndmetis-Debug-9fdf632ce7814bfc9b90.json",
+					"name" : "ndmetis",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0/out/build/x64-Debug",
+		"source" : "C:/Users/Cris Pat/Desktop/U/Semestre_10/Tesis/Toolbox Epileptic EEG Analysis/pruebas/CHAMELEON/metis-5.1.0"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}
