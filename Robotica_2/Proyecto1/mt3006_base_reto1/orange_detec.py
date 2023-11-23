@@ -5,24 +5,21 @@
 import sensor
 import time
 import math
+
 from pyb import UART
 
-# Always pass UART 3 for the UART number for your OpenMV Cam.
-# The second argument is the UART baud rate. For a more advanced UART control
-# example see the BLE-Shield driver.
+# UART 3, and baudrate.
 uart = UART(3, 115200)
-uart.init(115200, bits=8, parity=None, stop=1) # init with given parameters
 
-
-threshold_index = 3  # 0 for red, 1 for green, 2 for blue, 3 naranja
+threshold_index = 0  # 0 for red, 1 for green, 2 for blue
 
 # Color Tracking Thresholds (L Min, L Max, A Min, A Max, B Min, B Max)
 # The below thresholds track in general red/green/blue things. You may wish to tune them...
 thresholds = [
+    #30, 100, 15, 127, 15, 127
     (30, 100, 15, 127, 15, 127),  # generic_red_thresholds
     (30, 100, -64, -8, -32, 32),  # generic_green_thresholds
-    (0, 30, 0, 64, -128, 0),      # azul
-    (13, 86, -7, 30, 16, 78)      # naranja
+    (0, 30, 0, 64, -128, 0),
 ]  # generic_blue_thresholds
 
 sensor.reset()
@@ -37,13 +34,16 @@ clock = time.clock()
 # returned by "find_blobs" below. Change "pixels_threshold" and "area_threshold" if you change the
 # camera resolution. "merge=True" merges all overlapping blobs in the image.
 
+blobX=0
+blobY=0
+
 while True:
     clock.tick()
     img = sensor.snapshot()
     for blob in img.find_blobs(
         [thresholds[threshold_index]],
-        pixels_threshold=200,
-        area_threshold=200,
+        pixels_threshold=150,
+        area_threshold=150,
         merge=True,
     ):
         # These values depend on the blob not being circular - otherwise they will be shaky.
@@ -54,21 +54,16 @@ while True:
         # These values are stable all the time.
         img.draw_rectangle(blob.rect())
         img.draw_cross(blob.cx(), blob.cy())
-        print("Centro x: ", blob.cx(), "     Centro y: ", blob.cy())
-
-        """msg_in = uart.readchar()
-        print(msg_in)
-        if msg_in == 49:
-            uart.write(str(blob.cx()) + "x")
-        if msg_in == 50:
-            uart.write(str(blob.cy()) + "y")
-        """
-
-        uart.write("X"+str(blob.cx())+"Y"+str(blob.cy())+";")
-
-
         # Note - the blob rotation is unique to 0-180 only.
         img.draw_keypoints(
             [(blob.cx(), blob.cy(), int(math.degrees(blob.rotation())))], size=20
         )
-    #print(clock.fps())
+        blobX = blob.cx()
+        blobY = blob.area()
+        #print(blobY)
+        uart.write("X"+str(blobX)+"Y"+str(blobY)+";")
+        #print()
+        #print(uart.write("2"))
+        #if uart.any():
+            #print(uart.read())
+        #time.sleep_ms(1000)
