@@ -1,0 +1,34 @@
+﻿  mpmetis.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(88,1): warning C4005: 'INFINITY': redefinición de macro
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\GKlib\gk_arch.h(67,1): message : vea la definición anterior de 'INFINITY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(536,44): error C2059: error de sintaxis: '('
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(33,3): warning C4244: '-=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(42,3): warning C4244: '+=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(65,3): warning C4244: '-=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(81,3): warning C4244: '+=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(93,7): warning C4244: '-=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(95,7): warning C4244: '+=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(172,3): warning C4244: '-=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\mpmetis.c(179,3): warning C4244: '+=': conversión de 'double' a 'real_t'; posible pérdida de datos
+  cmdline_mpmetis.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(88,1): warning C4005: 'INFINITY': redefinición de macro
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\GKlib\gk_arch.h(67,1): message : vea la definición anterior de 'INFINITY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(536,44): error C2059: error de sintaxis: '('
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\cmdline_mpmetis.c(239,39): warning C4047: 'función': 'int *(__cdecl *)()' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\cmdline_mpmetis.c(239,35): warning C4024: 'gk_getopt_long_only': tipos distintos para el parámetro formal y el parámetro real 1
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\cmdline_mpmetis.c(239,45): warning C4047: 'función': 'char ***(__cdecl *)()' es distinto en los niveles de direccionamiento indirecto de 'char **'
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\cmdline_mpmetis.c(239,41): warning C4024: 'gk_getopt_long_only': tipos distintos para el parámetro formal y el parámetro real 2
+  io.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(88,1): warning C4005: 'INFINITY': redefinición de macro
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\GKlib\gk_arch.h(67,1): message : vea la definición anterior de 'INFINITY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(536,44): error C2059: error de sintaxis: '('
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\io.c(288,39): warning C4244: '=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\io.c(381,33): warning C4244: 'función': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\io.c(389,26): warning C4244: '=': conversión de 'double' a 'real_t'; posible pérdida de datos
+  stat.c
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(88,1): warning C4005: 'INFINITY': redefinición de macro
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\GKlib\gk_arch.h(67,1): message : vea la definición anterior de 'INFINITY'
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\ucrt\corecrt_math.h(536,44): error C2059: error de sintaxis: '('
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\stat.c(55,45): warning C4244: '=': conversión de 'double' a 'real_t'; posible pérdida de datos
+C:\Users\Cris Pat\Desktop\U\Semestre_10\Tesis\Toolbox Epileptic EEG Analysis\pruebas\CHAMELEON\metis-5.1.0\programs\stat.c(57,41): warning C4244: '=': conversión de 'double' a 'real_t'; posible pérdida de datos
+  Generando código...
